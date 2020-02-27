@@ -3,7 +3,6 @@
     <div id="nav">
       <!-- Router link looks up the path from index.js-->
       <router-link :to="{ name: 'event-list' }">List</router-link> |
-      <router-link :to="{ name: 'event-show' }">Show</router-link> |
       <router-link :to="{ name: 'event-create' }">Create</router-link>
     </div>
     <!-- Router view renders the component from index.js-->
