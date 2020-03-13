@@ -44,6 +44,20 @@
       "date": "2019-02-02T23:27:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 3200753,
+      "category": "housing",
+      "organizer": {
+        "id": "1",
+        "name": "Imran Khan"
+      },
+      "title": "test",
+      "description": "test",
+      "location": "test",
+      "date": "2020-03-11T17:24:00.000Z",
+      "time": "4 :00",
+      "attendees": []
     }
   ]
 }
