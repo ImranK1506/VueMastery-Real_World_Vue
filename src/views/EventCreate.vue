@@ -58,7 +58,7 @@
     },
     methods: {
       createEvent() {
-        this.$store.dispatch('createEvent', this.event)
+        this.$store.dispatch('event/createEvent', this.event)
          .then(() => {
            this.$router.push({
              name: 'event-show',
@@ -72,7 +72,7 @@
         })
       },
       createFreshEventObject() {
-        const user = this.$store.state.user;
+        const user = this.$store.state.user.user;
         const id = Math.floor(Math.random() * 10000000);
         return {
           id: id,
@@ -87,33 +87,6 @@
         }
       }
     }
-    // Using MapState one way
-    // computed: mapState({
-    //   userName: state => state.user.name,
-    //   userId: state => state.user.id,
-    //   categories: state => state.categories,
-    // })
-
-    // Using MapState with dot notation
-    // computed: mapState({
-    //   user: 'user',
-    //   categories: 'categories'
-    // })
-
-    // Using MapState but put all keys in an array
-    // computed: mapState(['user', 'categories'])
-
-    // Using MapState with object spread operator
-    // computed: {
-      // getEvent() {
-      //   return this.$store.getters.getEventById
-      // },
-    //   catLength() {
-    //     return this.$store.getters.catLength
-    //   },
-    //   ...mapGetters(['getEventById']),
-    //   ...mapState(['user', 'categories'])
-    // }
   }
 </script>
 

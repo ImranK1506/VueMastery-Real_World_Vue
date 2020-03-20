@@ -1,7 +1,7 @@
 <template>
    <div id="nav" class="nav">
       <router-link class="brand" to="/">Real World Events</router-link>
-      <!-- Router link looks up the path from index.js-->
+      <!-- Router link looks up the path from store.js-->
       <nav>
          <router-link :to="{ name: 'event-list' }">List</router-link> |
          <router-link :to="{ name: 'event-create' }">Create</router-link>

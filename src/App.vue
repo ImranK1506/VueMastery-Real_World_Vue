@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
-    <!-- Router view renders the component from index.js-->
+    <!-- Router view renders the component from store.js-->
     <!-- :key="$route.fullPath" tells the router to reload when the full URL changes -->
     <router-view :key="$route.fullPath"/>
   </div>

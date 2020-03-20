@@ -1,8 +1,8 @@
 <template>
    <div>
-      <h1>Event Listing</h1>
+      <h1>Events for {{ user.user.name }}</h1>
       <EventCard
-              v-for="event in events"
+              v-for="event in event.events"
               :key="event.id"
               :event="event"/>
       <template v-if="page !== 1">
@@ -29,7 +29,7 @@
     created() {
       this.perPage = 3;
 
-      this.$store.dispatch('fetchEvents', {
+      this.$store.dispatch('event/fetchEvents', {
         perPage: this.perPage, // Items to display per page
         page: this.page, // Which page we are on
       })
@@ -39,9 +39,9 @@
         return parseInt(this.$route.query.page) || 1
       },
       hasNextPage() {
-        return this.eventsTotal > this.page * this.perPage
+        return this.event.eventsTotal > this.page * this.perPage
       },
-      ...mapState(['events', 'eventsTotal']),
+      ...mapState(['event', 'user']),
     },
   }
 </script>
