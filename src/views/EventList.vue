@@ -41,7 +41,7 @@
       hasNextPage() {
         return this.event.eventsTotal > this.page * this.perPage
       },
-      ...mapState(['event', 'user']),
+      ...mapState(['event', 'user', 'notification']),
     },
   }
 </script>

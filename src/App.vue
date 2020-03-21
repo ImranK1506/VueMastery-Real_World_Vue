@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
+    <NotificationContainer/>
     <!-- Router view renders the component from store.js-->
     <!-- :key="$route.fullPath" tells the router to reload when the full URL changes -->
     <router-view :key="$route.fullPath"/>
@@ -9,9 +10,11 @@
 
 <script>
   import NavBar from "@/components/NavBar";
+  import NotificationContainer from "@/components/NotificationContainer";
 
   export default {
     components: {
+      NotificationContainer,
       NavBar
     }
   }

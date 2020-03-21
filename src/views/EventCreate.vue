@@ -66,10 +66,6 @@
            });
             this.event = this.createFreshEventObject()
          })
-        .catch((error) => {
-          console.log('Catch error');
-          console.log(error)
-        })
       },
       createFreshEventObject() {
         const user = this.$store.state.user.user;
