@@ -38,12 +38,12 @@
 </template>
 
 <script>
-   // import { mapState, mapGetters } from 'vuex';
-   import Datepicker from 'vuejs-datepicker';
+  import Datepicker from 'vuejs-datepicker';
+  import NProgress from 'nprogress';
 
   export default {
     components: {
-      Datepicker
+      Datepicker,
     },
     data() {
       const times = [];
@@ -53,19 +53,24 @@
       return {
         event: this.createFreshEventObject(),
         categories: this.$store.state.categories,
-        times
+        times,
       }
     },
     methods: {
       createEvent() {
-        this.$store.dispatch('event/createEvent', this.event)
-         .then(() => {
-           this.$router.push({
-             name: 'event-show',
-             params: { id: this.event.id }
-           });
-            this.event = this.createFreshEventObject()
-         })
+        NProgress.start(); // Start progress bar
+        this.$store
+            .dispatch('event/createEvent', this.event)
+            .then(() => {
+              this.$router.push({
+                name: 'event-show',
+                params: { id: this.event.id },
+              });
+              this.event = this.createFreshEventObject()
+            })
+        .catch(() => {
+          NProgress.done(); // Show error when progress bar stops
+        })
       },
       createFreshEventObject() {
         const user = this.$store.state.user.user;
@@ -79,10 +84,10 @@
           location: '',
           date: '',
           time: '',
-          attendees: []
+          attendees: [],
         }
-      }
-    }
+      },
+    },
   }
 </script>
 
