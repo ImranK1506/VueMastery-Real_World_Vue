@@ -11,7 +11,7 @@ const routes = [
     path: "/",
     name: "event-list",
     component: EventList,
-    props: true
+    props: true,
   },
   {
     path: "/event/create",
@@ -37,11 +37,32 @@ const routes = [
             routeTo.params.event = event;
             next();
           })
+          .catch((error) => {
+              if (error.response && error.response.status === 404) {
+                next({
+                  name: '404',
+                  params: {resource: 'event'},
+                })
+              } else {
+                next({ name: 'network-issue'})
+              }
+          })
     },
   },
   {
-    path: '*',
+    path: '/404',
+    name: '404',
+    props: true,
     component: () => import("../views/404NotFoundPage.vue"),
+  },
+  {
+    path: '*',
+    redirect: {name: '404'}, params: { resource: 'page'},
+  },
+  {
+    path: '/network-issue',
+    name: 'network-issue',
+    component: () => import("../views/NetworkIssue.vue"),
   },
 ];
 
