@@ -7,6 +7,7 @@ export const state = {
   events: [],
   eventsTotal: 0,
   event: {},
+  perPage: 3,
 };
 export const mutations = {
   ADD_EVENT(state, event) {
@@ -23,27 +24,27 @@ export const mutations = {
   },
 };
 export const actions = {
-  createEvent({ commit, dispatch }, event) {
+  createEvent({commit, dispatch}, event) {
     return EventService.postEvent(event)
         .then(() => {
           commit('ADD_EVENT', event);
           const notification = {
             type: 'success',
-            message: 'Successful event created'
+            message: 'Successful event created',
           };
-          dispatch('notification/add', notification, { root: true })
-    })
+          dispatch('notification/add', notification, {root: true})
+        })
         .catch(error => {
           const notification = {
             type: 'error',
-            message: 'CreateEvent error: ' + error.message
+            message: 'CreateEvent error: ' + error.message,
           };
-          dispatch('notification/add', notification, { root: true });
+          dispatch('notification/add', notification, {root: true});
           throw error
         })
   },
-  fetchEvents({ commit, dispatch }, {perPage, page}) {
-    EventService.getEvents(perPage, page)
+  fetchEvents({commit, dispatch}, {page}) {
+    return EventService.getEvents(state.perPage, page)
         .then(response => {
           commit('SET_EVENTS_TOTAL', parseInt(response.headers['x-total-count']));
           // console.log('Total events: ' + response.headers['x-total-count']);
@@ -52,28 +53,22 @@ export const actions = {
         .catch(error => {
           const notification = {
             type: 'error',
-            message: 'FetchEvents error: ' + error.message
+            message: 'FetchEvents error: ' + error.message,
           };
-          dispatch('notification/add', notification, { root: true })
+          dispatch('notification/add', notification, {root: true})
         })
   },
-  fetchEvent({commit, getters, dispatch}, id) {
+  fetchEvent({commit, getters}, id) {
     // Check if there already is an event
     let event = getters.getEventById(id);
 
     if (event) {
-      commit('SET_EVENT', event)
+      commit('SET_EVENT', event);
     } else {
-      EventService.getEvent(id)
+      return EventService.getEvent(id)
           .then(response => {
             commit('SET_EVENT', response.date);
-          })
-          .catch(error => {
-            const notification = {
-              type: 'error',
-              message: 'FetchEvent error: ' + error.message
-            };
-            dispatch('notification/add', notification, { root: true })
+            return response.data
           })
     }
   },

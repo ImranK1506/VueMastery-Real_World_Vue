@@ -1,4 +1,5 @@
 import axios from 'axios';
+import NProgress from 'nprogress';
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:3000/',
@@ -6,7 +7,20 @@ const apiClient = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'
-  }
+  },
+  timeout: 15000
+});
+
+// On request
+apiClient.interceptors.request.use(config => {
+  NProgress.start();
+  return config
+});
+
+// On response
+apiClient.interceptors.request.use(response => {
+  NProgress.done();
+  return response
 });
 
 export default {

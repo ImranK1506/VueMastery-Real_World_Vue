@@ -14,13 +14,11 @@
         required: true
       }
     },
-
     computed: {
       notificationTypeClass() {
         return `-text-${this.notification.type}`
       }
     },
-
     data() {
       return {
         timeout: null
@@ -33,7 +31,6 @@
       clearTimeout(this.timeout)
     },
     methods: mapActions('notification', ['remove']),
-
   }
 </script>
 
