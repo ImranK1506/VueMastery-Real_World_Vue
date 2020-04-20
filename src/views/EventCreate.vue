@@ -3,10 +3,16 @@
       <h1>Create Event</h1>
 
       <form @submit.prevent="createEvent">
-         <label>Select a category</label>
-         <select v-model="event.category">
-            <option v-for="category in categories" :key="category">{{ category }}</option>
-         </select>
+
+         <BaseSelect
+            v-model="event.category"
+            label="Select a category"
+            :options="categories"
+         />
+<!--         <label>Select a category</label>-->
+<!--         <select v-model="event.category">-->
+<!--            <option v-for="category in categories" :key="category">{{ category }}</option>-->
+<!--         </select>-->
 
          <!--Globally registered component-->
          <h3>Name & describe your event</h3>
@@ -58,9 +64,11 @@
    // import { mapState, mapGetters } from 'vuex';
    import Datepicker from 'vuejs-datepicker';
    import BaseInput from "@/components/BaseInput";
+   import BaseSelect from "@/components/BaseSelect";
 
   export default {
     components: {
+      BaseSelect,
       BaseInput,
       Datepicker
     },
