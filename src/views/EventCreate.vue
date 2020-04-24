@@ -3,24 +3,42 @@
       <h1>Create Event</h1>
 
       <form @submit.prevent="createEvent">
-         <label>Select a category</label>
-         <select v-model="event.category">
-            <option v-for="category in categories" :key="category">{{ category }}</option>
-         </select>
+         <!--Globally registered component-->
+         <BaseSelect
+                 v-model="event.category"
+                 label="Select a category"
+                 :options="categories"
+         />
+
          <h3>Name & describe your event</h3>
-         <div class="field">
-            <label>Title</label>
-            <input v-model="event.title" type="text" placeholder="Add an event title"/>
-         </div>
-         <div class="field">
-            <label>Description</label>
-            <input v-model="event.description" type="text" placeholder="Add a description"/>
-         </div>
+         <BaseInput
+                 v-model="event.title"
+                 label="Title"
+                 type="text"
+                 placeholder="Add an event title"
+                 aria-placeholder="Add an event title"
+                 class="field"
+         />
+         <BaseInput
+                 v-model="event.description"
+                 label="Description"
+                 type="text"
+                 placeholder="Add a description"
+                 aria-placeholder="Add a description"
+                 class="field"
+         />
+
+         <!--Globally registered component-->
          <h3>Where is your event?</h3>
-         <div class="field">
-            <label>Location</label>
-            <input v-model="event.location" type="text" placeholder="Add a location"/>
-         </div>
+         <BaseInput
+                 v-model="event.location"
+                 label="Location"
+                 type="text"
+                 placeholder="Add a location"
+                 aria-placeholder="Add a location"
+                 class="field"
+         />
+
          <h3>When is your event?</h3>
          <div class="field">
             <label>Date</label>
@@ -38,12 +56,16 @@
 </template>
 
 <script>
+  // import { mapState, mapGetters } from 'vuex';
   import Datepicker from 'vuejs-datepicker';
-  import NProgress from 'nprogress';
+  import BaseInput from "@/components/BaseInput";
+  import BaseSelect from "@/components/BaseSelect";
 
   export default {
     components: {
-      Datepicker,
+      BaseSelect,
+      BaseInput,
+      Datepicker
     },
     data() {
       const times = [];
@@ -53,24 +75,19 @@
       return {
         event: this.createFreshEventObject(),
         categories: this.$store.state.categories,
-        times,
+        times
       }
     },
     methods: {
       createEvent() {
-        NProgress.start(); // Start progress bar
-        this.$store
-            .dispatch('event/createEvent', this.event)
+        this.$store.dispatch('event/createEvent', this.event)
             .then(() => {
               this.$router.push({
                 name: 'event-show',
-                params: { id: this.event.id },
+                params: { id: this.event.id }
               });
               this.event = this.createFreshEventObject()
             })
-        .catch(() => {
-          NProgress.done(); // Show error when progress bar stops
-        })
       },
       createFreshEventObject() {
         const user = this.$store.state.user.user;
@@ -84,10 +101,10 @@
           location: '',
           date: '',
           time: '',
-          attendees: [],
+          attendees: []
         }
-      },
-    },
+      }
+    }
   }
 </script>
 
