@@ -3,7 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
 import BaseIcon from "@/components/BaseIcon";
+import Vuelidate from 'vuelidate';
 import 'nprogress/nprogress.css';
+
+Vue.use(Vuelidate)
 
 // Global component registration
 Vue.component('BaseIcon', BaseIcon);
