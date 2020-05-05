@@ -5,6 +5,9 @@ import store from "./store/store";
 import BaseIcon from "@/components/BaseIcon";
 import Vuelidate from 'vuelidate';
 import 'nprogress/nprogress.css';
+import DateFilter from './filters/date'
+
+Vue.filter('date', DateFilter)
 
 Vue.use(Vuelidate)
 

@@ -20,7 +20,6 @@
   export default {
     mixins: [formFieldMixin],
     props: {
-      value: [String, Number],
       options: {
         type: Array,
         required: true

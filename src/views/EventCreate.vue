@@ -74,7 +74,7 @@
          </template>
 
          <BaseSelect
-                 v-model.trim="event.time"
+                 v-model="event.time"
                  label="Select a time"
                  :options="times"
                  class="field"

@@ -27,7 +27,8 @@ export const actions = {
   createEvent({commit, dispatch}, event) {
     return EventService.postEvent(event)
         .then(() => {
-          commit('ADD_EVENT', event);
+          commit('ADD_EVENT', event)
+          commit('SET_EVENT', event)
           const notification = {
             type: 'success',
             message: 'Successful event created',
