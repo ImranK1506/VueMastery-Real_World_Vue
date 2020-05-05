@@ -10,26 +10,20 @@
 </template>
 
 <script>
-  export default {
-    inheritAttrs: false, // turn off automatic inheritance by the root element
-    props: {
-      value: [String, Number],
-      label: String,
-    },
-    methods: {
-      updateValue(event) {
-        this.$emit('input', event.target.value)
-        console.log(this.updateValue(event))
-      },
-    },
+   import { formFieldMixin } from "@/mixins/formFieldMixin";
+   export default {
+    mixins: [formFieldMixin],
+     props: {
+      value: [String, Number]
+     },
     computed: {
       listeners() {
         return {
           ...this.$listeners,
           input: this.updateValue,
         }
-      },
-    },
+      }
+    }
   }
 </script>
 

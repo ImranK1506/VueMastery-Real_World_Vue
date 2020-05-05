@@ -16,21 +16,16 @@
 </template>
 
 <script>
+  import { formFieldMixin } from "@/mixins/formFieldMixin";
   export default {
-    inheritAttrs: false, // turn off automatic inheritance by the root element
+    mixins: [formFieldMixin],
     props: {
+      value: [String, Number],
       options: {
         type: Array,
         required: true
       },
-      value: [String, Number],
-      label: String,
-    },
-    methods: {
-      updateValue(event) {
-        this.$emit('input', event.target.value)
-      },
-    },
+    }
   }
 </script>
 
